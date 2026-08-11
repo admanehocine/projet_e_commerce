@@ -1,6 +1,4 @@
-//
-
-//ProductForm
+//ProductPage 
 import { Page } from "@playwright/test"
 import { LoginPage } from "./login.page";
 
