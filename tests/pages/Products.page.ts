@@ -39,5 +39,13 @@ export class ProductsPage extends LoginPage {
     getAlert_add_product() {
         return this.elements3.alert_add_product()
     }
+    async get_Size_Products() {
+        let size: number;
+        size = await this.elements3.row_products().count()
+        return Math.floor(Math.random() * size);
+    }
+    get_any_price_product(position: number) {
+        return this.elements3.price_product().nth(position)
+    }
 
 }
