@@ -12,11 +12,12 @@ test.beforeEach(async ({ page }) => {
     p = new ProductsPage(page);
     await page.goto("https://api.efi-academy.com/e-commerce-test-api/auth/login.php")
     await dp.login("admin@boutique.qa", "Admin123!");
-    await dp.ClickAjoutProduit();
+
 })
 
 test("add product form", async ({ page }) => {
-    //le nom
+    //le 
+    await dp.ClickAjoutProduit();
     const name_product = generateProductName()
     await pf.saisirNom(name_product);
     await pf.saisirDesc(generateDescription());
@@ -32,6 +33,7 @@ test("add product form", async ({ page }) => {
 
 test("add product form second methode", async ({ page }) => {
     //le nom
+    await dp.ClickAjoutProduit();
     const name_product = "nom de produit"
     await pf.saisirNom(name_product);
     await pf.saisirDesc("description");
@@ -45,4 +47,27 @@ test("add product form second methode", async ({ page }) => {
     expect(await row_product["price"]).toEqual(prix_saisie.replace(".", ",") + " €");
     let price_obtt = await row_product["stock"]
     expect(price_obtt!.toString().trim()).toEqual(stock_saisie.toString());
+})
+
+test("update random product", async ({ page }) => {
+
+    //cliquer  button priduits 
+    await dp.ClickGestionProduit();
+    //selectionner  un produit randol
+    let index = await p.get_any_Products()
+    //selectio  le id produit
+    let id_produit = await p.get_any_row_product(index).getAttribute(p.get_attribute_locator())
+    //cliqur sur buttton  modifier
+    await p.click_any_modifier_product(index)
+    //remplir le formaire update
+    const name_product = generateProductName()
+    await pf.saisirNom(name_product);
+    let prix_saisie = await pf.saisirPrix()
+    let stock_saisie = await pf.saisirStock()
+    await pf.ClickAddProduct()
+    //assertion dans tableau
+    await expect(p.get_any_name_product(Number(id_produit))).toContainText(name_product)
+    await expect(p.get_any_price_product(Number(id_produit))).toContainText(prix_saisie.replace(".", ",") + " €")
+    await expect(p.get_any_stock_product(Number(id_produit))).toContainText(stock_saisie.toString())
+
 })

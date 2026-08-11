@@ -8,6 +8,7 @@ export class DashboardPage extends LoginPage {
     elements2 = {
         alert_Bienvenu: () => this.page.locator("[data-testid='alert-message']"),
         btn_ajout_produit: () => this.page.locator("[data-testid='dashboard-add-product']"),
+        btn_gestion_produit: () => this.page.locator("[data-testid='dashboard-manage-products']"),
     }
 
 
@@ -16,6 +17,9 @@ export class DashboardPage extends LoginPage {
     }
     async ClickAjoutProduit() {
         await this.elements2.btn_ajout_produit().click()
+    }
+    async ClickGestionProduit() {
+        await this.elements2.btn_gestion_produit().click()
     }
 
 }
