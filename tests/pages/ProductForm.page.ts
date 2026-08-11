@@ -24,12 +24,16 @@ export class ProductFormPage extends LoginPage {
         await this.elements3.description_input().fill(desc)
     }
     async saisirPrix() {
-        let price = Math.floor(Math.random() * 46) + 10
-        await this.elements3.prix_input().fill(price.toString())
+        let price = Math.random() * 46 + 10
+        await this.elements3.prix_input().fill(price.toFixed(2))
+        return price.toFixed(2);
     }
     async saisirStock() {
-        let price = Math.floor(Math.random() * 11)// + 10
-        await this.elements3.stock_input().fill(price.toString())
+        let stock = Math.floor(Math.random() * 11)// + 10
+        await this.elements3.stock_input().fill(stock.toString())
+        if (stock === 0) return "Rupture";
+        else if (stock <= 5) return stock + " (faible)";
+        else return stock;
     }
     async selectFileImage() {
         await this.elements3.img_input().setInputFiles("./tests/assets/img1.png")

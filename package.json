@@ -7,9 +7,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "@types/node": "^26.2.0"
+    "@types/node": "^26.2.0",
+    "@faker-js/faker": "^10.5.0"
   }
 }
