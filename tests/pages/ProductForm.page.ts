@@ -2,7 +2,7 @@
 import { Page } from "@playwright/test"
 import { LoginPage } from "./login.page";
 
-export class ProductForm extends LoginPage {
+export class ProductFormPage extends LoginPage {
 
     constructor(page: Page) {
         super(page);
@@ -32,7 +32,10 @@ export class ProductForm extends LoginPage {
         await this.elements3.stock_input().fill(price.toString())
     }
     async selectFileImage() {
-        await this.elements3.img_input().setInputFiles("../assets/img1.png")
+        await this.elements3.img_input().setInputFiles("./tests/assets/img1.png")
+    }
+    async ClickAddProduct() {
+        await this.elements3.btn_Ajout().click();
     }
 
 }
